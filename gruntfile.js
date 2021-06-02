@@ -30,12 +30,28 @@ module.exports = function (grunt) {
                     interrupt: true
                 }
             }
+        },
+
+        cssmin: {
+            target: {
+              files: [{
+                expand: true,
+                cwd: 'ui',
+                src: ['**/*.css', '!*.min.css'],
+                dest: 'ui/',
+                ext: '.min.css',
+                rename: function (dest, src) {
+                    return (dest + src);
+                }
+              }]
+            }
         }
     })
 
     // Load Grunt Plugins
     grunt.loadNpmTasks('grunt-contrib-watch')
     grunt.loadNpmTasks('grunt-postcss')
+    grunt.loadNpmTasks('grunt-contrib-cssmin')
 
     // Register Tasks
     grunt.registerTask('compile-tailwindcss', ['postcss'])
