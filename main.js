@@ -35,7 +35,7 @@ navLink.forEach((link) => {
                 megamenu.classList.remove('megamenu-slide-inside')
                 hide(megamenu)
                 header.classList.remove('fixed')
-            }, 490);  
+            }, 490)
         }          
     })
 })
@@ -92,6 +92,17 @@ linkNest.forEach((el) => {
             nestedLinks.classList.add('slideRight-12')
         }, 100);
     })
+})
+
+header.addEventListener('mouseleave', () => {
+    if (megamenu.style.display == 'flex') {
+        megamenu.classList.add('megamenu-slide-inside')
+        setTimeout(() => {
+            megamenu.classList.remove('megamenu-slide-inside')
+            hide(megamenu)
+            header.classList.remove('fixed')
+        }, 490) 
+    }
 })
 
 // show element (flex)
