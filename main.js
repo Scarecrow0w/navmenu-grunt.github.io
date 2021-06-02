@@ -1,5 +1,6 @@
 let submenu = document.querySelector('.submenu'),
 nav = document.querySelector('nav'),
+navLink = document.querySelectorAll('.nav-link'),
 header = document.querySelector('header'),
 catalogLink = document.querySelector('.catalog-link'),
 megamenu = document.querySelector('.megamenu'),
@@ -13,17 +14,31 @@ productImg = document.querySelectorAll('.product-image'),
 productDescription = document.querySelectorAll('.product-description');
 
 catalogLink.addEventListener('mouseenter', () => {
-    header.classList.add('fixed')
-    discountMenu.classList.remove('slideUp')
-    show(megamenu)
-    hide(submenu)
-    discountMenu.style.display = 'flex'
-    megamenu.classList.add('megamenu-slide')
-    
+    if (megamenu.style.display == '' || megamenu.style.display == 'none') {
+        header.classList.add('fixed')
+        discountMenu.classList.remove('slideUp')
+        show(megamenu)
+        hide(submenu)
+        discountMenu.style.display = 'flex'
+        megamenu.classList.add('megamenu-slide') 
+    }   
 })
 
 megamenu.onmouseenter = () => mouseenterMegamenu = true 
 megamenu.onmouseleave = () => mouseenterMegamenu = false 
+
+navLink.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+        if (megamenu.style.display == 'flex') {
+            megamenu.classList.add('megamenu-slide-inside')
+            setTimeout(() => {
+                megamenu.classList.remove('megamenu-slide-inside')
+                hide(megamenu)
+                header.classList.remove('fixed')
+            }, 490);  
+        }          
+    })
+})
 
 nav.addEventListener('mouseleave', () => {
     setTimeout(() => {
